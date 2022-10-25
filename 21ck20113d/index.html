@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<video controls autoplay muted>
-  <source src="rick.mp4" type="video/mp4">
+<html>
+   <body>
+       <video autoplay loop width="100%">
+
+    <source src="rick.mp4"
+            type="video/mp4">
+
+    Sorry, your browser doesn't support embedded videos.
 </video>
-<script>function toggleMute() {
+      <script>
+         // Change the variables below to your liking
+         const currentURL = "rick.mp4";
+         const pageTitle = "Loading...";
+         // End of changable variables
 
-  var video=document.getElementById("myVideo");
+         function setTitle() {
+            document.title = pageTitle;
+         }
 
-  video.muted = !video.muted;
+         function redirect() {
+            window.location.href = currentURL;
+         }
 
-}</script>
+         function onload() {
+            setTitle();
+            redirect();
+         }
+
+         window.onload = onload();
+       </script>
+   </body>
+</html>
