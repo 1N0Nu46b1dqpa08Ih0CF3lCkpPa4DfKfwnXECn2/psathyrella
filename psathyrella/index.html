@@ -56,7 +56,7 @@ const microphone = new Microphone();</script>
     var ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    var audio = new Audio('https://docs.google.com/uc?export=download&id=12u88aiAwgKnCXaIhzNzFJb1T0daGfuTe');
+    var audio = new Audio('MegaDrive_Neuroframe.mp3');
     class Bar {
         constructor(x, y, width, height, color, index){
             this.x = x;
@@ -81,7 +81,7 @@ const microphone = new Microphone();</script>
             context.translate(0, 0);
             context.rotate(this.index * 0.2 + 1);
             context.scale(this.index / 256 * (1.3 + volume), 1.5 + volume * 0.2);
-            
+
             context.beginPath();
             context.moveTo(this.x, this.y);
             context.lineTo(this.y, this.height * 1.4);
@@ -101,7 +101,7 @@ const microphone = new Microphone();</script>
     }
     createBars();
     let angle = 0;
-    
+
     function animate(){
         if (microphone.initialized){
             audio.play();
