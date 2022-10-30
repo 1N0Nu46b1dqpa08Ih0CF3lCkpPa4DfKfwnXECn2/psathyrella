@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width-device-width, initial-scale=1.0">
-    <title>Microphone animations</title>
+    <title>Psathyrella</title>
     <style>*{
     margin: 0;
     padding: 0;
@@ -16,19 +16,101 @@ body {
     canvas {
     background: black;
 }
+
+.text-box{
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    font-size: 20px;
+    opacity: 0.01
+    font-family: sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+span{
+    animation: mover 0.19s linear infinite;
+    display: inline-block;
+    color: #000000;
+    font-weight: bolder;
+}
+@keyframes mover
+{
+    0%{
+        text-shadow: 0 0 30px rgba(0, 0, 0, 0);
+      }
+    50%{
+        text-shadow: 0 0 30px rgba(0, 0, 0, 0.30);
+        transform: translateY(300px);
+      }
+    100%
+      {
+        text-shadow: 0 0 30px rgba(0, 0, 0, 0);
+      }
+}
+span:nth-child(1)
+{
+    animation-delay: 0.1s;
+}
+span:nth-child(2)
+{
+    animation-delay: 0.2s;
+}
+span:nth-child(3)
+{
+    animation-delay: 0.3s;
+}
+span:nth-child(4)
+{
+    animation-delay: 0.4s;
+}
+span:nth-child(5)
+{
+    animation-delay: 0.5s;
+}
+span:nth-child(6)
+{
+    animation-delay: 0.6s;
+}
+span:nth-child(7)
+{
+    animation-delay: 0.7s;
+}
+span:nth-child(8)
+{
+    animation-delay: 0.8s;
+}
+span:nth-child(9)
+{
+    animation-delay: 0.9s;
+}
+span:nth-child(10)
+{
+    animation-delay: 1s;
+}
+span:nth-child(11)
+{
+    animation-delay: 1.1s;
+}
 </style>
-    <script>class Microphone {
+    <script>
+    class AudioAnalyzer {
     constructor(){
         this.initialized = false;
         navigator.mediaDevices.getUserMedia({audio:true})
         .then(function(stream){
+
+            // trying new audio source for visualization, instead of microphone
             this.audioContext = new AudioContext();
-            this.microphone = this.audioContext.createMediaStreamSource(stream);
+            this.audioSource = this.audioContext.createMediaStreamSource(stream);
             this.analyser = this.audioContext.createAnalyser();
             this.analyser.fftSize = 512;
             const bufferLength = this.analyser.frequencyBinCount;
             this.dataArray = new Uint8Array(bufferLength);
-            this.microphone.connect(this.analyser);
+            this.audioSource.connect(this.analyser);
             this.initialized = true;
         }.bind(this)).catch(function(err){
             alert(err);
@@ -50,13 +132,14 @@ body {
         return volume;
     }
 }
-const microphone = new Microphone();</script>
+
+</script>
     <script>function main(){
     var canvas = document.getElementById('myCanvas');
     var ctx = canvas.getContext('2d');
+    var audio = new Audio("MegaDrive_Neuroframe.mp3");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    var audio = new Audio('MegaDrive_Neuroframe.mp3');
     class Bar {
         constructor(x, y, width, height, color, index){
             this.x = x;
@@ -71,16 +154,17 @@ const microphone = new Microphone();</script>
             if (sound > this.height){
                 this.height = sound;
             } else {
-                this.height -= this.height * 0.2;
+                this.height -= this.height * 0.1;
             }
         }
         draw(context, volume){
             context.strokeStyle = this.color;
+            context.lineWidth = 4;
             context.save();
 
             context.translate(0, 0);
-            context.rotate(this.index * 0.2 + 1);
-            context.scale(this.index / 256 * (1.3 + volume), 1.5 + volume * 0.2);
+            context.rotate(this.index * 0.12);
+            context.scale(this.index / 256 * (2.4 + volume), 1.5 + volume * 0.2);
 
             context.beginPath();
             context.moveTo(this.x, this.y);
@@ -90,31 +174,32 @@ const microphone = new Microphone();</script>
             context.restore();
         }
     }
-    const microphone = new Microphone();
+    const audioAnalyzer = new AudioAnalyzer();
+    console.log(audioAnalyzer)
     let bars = [];
     let barWidth = canvas.width/256;
     function createBars(){
         for (let i = 0; i < 256; i++){
-            let color = 'hsl(' + i*45*Math.sin((i * 2)) + ',' + 50+100*Math.sin(i) +'%, 50%)';
-            bars.push(new Bar(0, i * 1.50, 10, 50, color, i));
+            let color = 'hsl(' + i*45*Math.sin((i * 2)) + ',' + 50+10*Math.sin(i) +'%, 50%)';
+            bars.push(new Bar(0, i * 3.0, 10, 50, color, i));
         }
     }
     createBars();
     let angle = 0;
 
     function animate(){
-        if (microphone.initialized){
+        if (audioAnalyzer.initialized){
             audio.play();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             // generates audio from microphone
             // new comment test
-            const samples = microphone.getSamples();
-            const volume = microphone.getVolume();
+            const samples = audioAnalyzer.getSamples();
+            const volume = audioAnalyzer.getVolume();
             // animate bars based on microphone
-            angle -= 0.1 + volume * 0.1;
+            angle -= 0.1 + volume * 0.2;
             ctx.save();
             ctx.translate(canvas.width/2, canvas.height/2);
-            ctx.rotate(angle + Math.sin(angle));
+            ctx.rotate(4*angle + Math.sin(angle));
             bars.forEach(function(bar, i){
                 bar.update(samples[i]);
                 bar.draw(ctx, volume);
@@ -133,4 +218,17 @@ const microphone = new Microphone();</script>
 <body onload="main()">
     <canvas id="myCanvas"></canvas>
 </body>
+<div class="text-box">
+<span>P</span>
+<span>S</span>
+<span>A</span>
+<span>T</span>
+<span>H</span>
+<span>Y</span>
+<span>R</span>
+<span>E</span>
+<span>L</span>
+<span>L</span>
+<span>A</span>
+</div>
 </html>
