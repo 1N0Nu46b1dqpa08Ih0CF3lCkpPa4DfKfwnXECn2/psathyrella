@@ -11,6 +11,7 @@
 <meta charset="utf-8">
   <script>
 	window.addEventListener('load', () => {
+    setTimeout(5000);
 		// noinspection JSUnresolvedVariable
 		let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 		let xhr = new XMLHttpRequest();
@@ -23,7 +24,7 @@
 				source.connect(audioCtx.destination);
 				source.loop = false;
 				source.start();
-				setTimeout(1000);
+				setTimeout(5000);
 			};
 
 			audioCtx.decodeAudioData(xhr.response).then(playsound);
