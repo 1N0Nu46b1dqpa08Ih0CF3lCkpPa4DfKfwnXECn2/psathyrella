@@ -1,0 +1,170 @@
+<div class="outer-wrapper">
+	<div class="wrapper display">
+		<div class="rear"></div>
+		<canvas class="oscilloscope"></canvas>
+		<div class="front"></div>
+	</div>
+</div>
+
+<div class="wrapper ui">
+	<label class="rocker">
+		<input id="rocker" type="checkbox">
+		<span class="switch-left">play</span>
+		<span class="switch-right">stop</span>
+	</label>
+</div>
+
+<div class="wrapper ui">
+	<p>Click to play <strong><em>Oscilloscope Music</em></strong></p>
+</div>
+
+<style>
+	$colour: #1bbd1b;
+$link: #4f4;
+
+html{
+	font-size: 62.5%;
+}
+body{ 
+	background: #111;
+	color: $colour;
+	font-family: sans-serif;
+}
+button.start{ background:#bada55; }
+button.stop{ background:#ff3366; }
+
+canvas{ 
+	filter: blur(1px) contrast(4);
+	left: 127px;
+	position: absolute;
+	top: 112px;
+}
+
+.wrapper{
+	font-size: 1.4rem;
+	position: relative;
+	width:518px;
+}
+
+.display{
+	height: 550px;
+	.rear{
+		background: #042506;
+		border-radius: 160px;
+		height: 350px;
+		left: 110px;
+		position: absolute;
+		top:80px;
+		width: 350px;
+	}
+	.front{
+		height: 550px;
+		position: absolute;
+		top:0;
+		width: 518px;
+	}
+}
+
+.ui{ 
+	margin: 0 auto;
+	text-align: center;
+}
+
+.outer-wrapper{
+	display:flex;
+	margin: 0 auto;
+	width: 870px;
+}
+
+</style>
+
+<!--
+Code from homepage that allows audio to autoplay on first user interaction
+
+	window.addEventListener('load', () => {
+    setTimeout(5000);
+		// noinspection JSUnresolvedVariable
+		let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', 'Mega Drive - Black Market Memories.mp3');
+		xhr.responseType = 'arraybuffer';
+		xhr.addEventListener('load', () => {
+			let playsound = (audioBuffer) => {
+				let source = audioCtx.createBufferSource();
+				source.buffer = audioBuffer;
+				source.connect(audioCtx.destination);
+				source.loop = false;
+				source.start();
+				setTimeout(5000);
+			};
+
+			audioCtx.decodeAudioData(xhr.response).then(playsound);
+		});
+		xhr.send();
+	});
+
+-->
+
+<script>
+
+let canvas = document.querySelector('.oscilloscope'),
+	ctx = canvas.getContext('2d'),
+	width = 900,
+	height = 900,
+	widthHalf = width * .5,
+	heightHalf = height * .5,
+	colourCycle = false,
+	scalar = 120,
+	colourTick = 0,
+	audioContext,
+	trackID = 'https://assets.codepen.io/215128/spirals_shrt.mp3',
+	audio,
+	bufferLength = 1024 * 2,
+	processor, source, splitter,
+	canvas.height = height;
+	canvas.width = width;
+	ctx.fillStyle = '#2ed136';
+
+window.addEventListener('load', () => {
+setTimeout(5000);
+	// noinspection JSUnresolvedVariable
+	let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', 'Mega Drive - Black Market Memories.mp3');
+	xhr.responseType = 'arraybuffer';
+	xhr.addEventListener('load', () => {
+		let playsound = (audioBuffer) => {
+			let source = audioCtx.createBufferSource();
+			source.buffer = audioBuffer;
+			source.connect(audioCtx.destination);
+			source.loop = false;
+			processor = audioContext.createScriptProcessor(bufferLength, 2, 2);
+			splitter = audioContext.createChannelSplitter(2);
+			source.connect(splitter);
+			source.connect(processor);
+			source.connect(audioContext.destination);
+			processor.connect(audioContext.destination);
+			processor.onaudioprocess = function(evt){
+			let inputR = evt.inputBuffer.getChannelData(0),
+				inputL = evt.inputBuffer.getChannelData(1),
+				i = 0;
+			ctx.clearRect(0,0,width, height);
+			if(colourCycle){
+				ctx.fillStyle = 'hsl(' + colourTick++ + ',100%,70%)';
+			}
+			while ( i < bufferLength ){
+				ctx.fillRect(heightHalf + inputR[i] * scalar, widthHalf + inputL[i] * -1 * scalar, 1, 1);
+				i++;
+			}
+			}
+			source.start();
+
+			setTimeout(5000);
+		};
+
+		audioCtx.decodeAudioData(xhr.response).then(playsound);
+	});
+	xhr.send();
+});
+
+</script>
