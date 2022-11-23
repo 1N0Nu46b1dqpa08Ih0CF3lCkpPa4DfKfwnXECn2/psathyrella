@@ -105,14 +105,17 @@ function animate(timeStamp){
     lastTime = timeStamp;
     if (timer > nextFrame){
         ctx.textAlign = "center";
-        ctx.green = Math.floor(128 + (Math.random() * 255/2));
-        ctx.red = Math.floor(128 + (Math.random() * 255/2));
-        ctx.blue = Math.floor(128 + (Math.random() * 255/2));
+        ctx.green = Math.floor((Math.random() * 255));
+        ctx.red = Math.floor((Math.random() * 255));
+        ctx.blue = Math.floor((Math.random() * 255));
+        ctx.green2 = Math.floor(ctx.green*2/3);
+        ctx.red2 = Math.floor(ctx.red*2/3);
+        ctx.blue2 = Math.floor(ctx.blue*2/3);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = effect.fontSize + 'px monospace';
-        ctx.fillStyle = '#rgb(${ctx.red}*2/3, ${ctx.green*2/3}, ${ctx.blue}*2/3)';
         ctx.fillStyle = '#rgb(${ctx.red}, ${ctx.green}, ${ctx.blue})';
+        ctx.fillStyle = '#rgb(${ctx.red2}, ${ctx.green2}, ${ctx.blue2})';
 
         ctx2.textAlign = "center";
         ctx2.clearRect(0, 0, canvas.width, canvas.height);
