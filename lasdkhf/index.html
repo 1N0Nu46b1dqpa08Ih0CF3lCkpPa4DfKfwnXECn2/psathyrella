@@ -105,7 +105,10 @@ function animate(timeStamp){
     lastTime = timeStamp;
     if (timer > nextFrame){
         ctx.textAlign = "center";
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.green = Math.floor(128 + (Math.random() * 255/2));
+        ctx.red = Math.floor(128 + (Math.random() * 255/2));
+        ctx.blue = Math.floor(128 + (Math.random() * 255/2));
+        ctx.fillStyle = 'rgba(${ctx.red}, ${ctx.green}, ${ctx.blue}, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = effect.fontSize + 'px monospace';
         ctx.fillStyle = '#03A062';
