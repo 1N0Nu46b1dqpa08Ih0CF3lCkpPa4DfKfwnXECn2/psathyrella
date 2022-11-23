@@ -209,6 +209,14 @@ class Game {
       this.state = STATE.Playing;
       this.saved = true;
 
+      if ( this.timer.converted = "2:00" ) {
+
+        this.scrambler.scramble();
+        this.controls.scrambleCube();
+        this.timer.reset;
+        this.newGame = true;
+      }
+
       this.transition.buttons( BUTTONS.None, BUTTONS.Menu );
 
       this.transition.zoom( STATE.Playing, duration );
