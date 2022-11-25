@@ -49,7 +49,7 @@ class Timer extends Animation {
 		this.currentTime = Date.now();
 		this.deltaTime = this.currentTime - this.startTime;
 		this.convert();
-    	console.log("In timer.update() " + this.deltaTime.toString());
+    	// console.log("In timer.update() " + this.deltaTime.toString());
 
 		if ( this.converted != old ) {
 
@@ -58,6 +58,11 @@ class Timer extends Animation {
 
 		}
 
+		if ( this.deltaTime >= 10000 ) {
+			this.scrambler.scramble();
+			this.controls.scrambleCube();
+			this.newGame = true;
+		}
 
 	}
 

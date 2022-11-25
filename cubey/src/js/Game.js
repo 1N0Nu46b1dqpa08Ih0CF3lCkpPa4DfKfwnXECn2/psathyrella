@@ -203,6 +203,12 @@ class Game {
 
       }
 
+      if ( this.deltaTime >= 10000 ) {
+        this.scrambler.scramble();
+        this.controls.scrambleCube();
+        this.newGame = true;
+      }
+
       const duration = this.saved ? 0 :
         this.scrambler.converted.length * ( this.controls.flipSpeeds[0] + 10 );
 
@@ -227,16 +233,6 @@ class Game {
         if ( ! this.newGame ) this.timer.start( true )
 
       }, this.transition.durations.zoom );
-
-      if ( this.timer.deltaTime >= 10000 ) {
-
-        this.scrambler.scramble();
-        this.controls.scrambleCube();
-        this.timer.reset();
-        this.timer.start();
-        this.timer.update();
-        this.newGame = true;
-      }
       
     } else {
 

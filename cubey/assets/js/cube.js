@@ -2399,7 +2399,7 @@ class Timer extends Animation {
 		this.currentTime = Date.now();
 		this.deltaTime = this.currentTime - this.startTime;
 		this.convert();
-    console.log("In timer.update() " + this.deltaTime.toString());
+    	// console.log("In timer.update() " + this.deltaTime.toString());
 
 		if ( this.converted != old ) {
 
@@ -2408,6 +2408,11 @@ class Timer extends Animation {
 
 		}
 
+		if ( this.deltaTime >= 10000 ) {
+			this.scrambler.scramble();
+			this.controls.scrambleCube();
+			this.newGame = true;
+		}
 
 	}
 
@@ -3864,6 +3869,12 @@ class Game {
 
       }
 
+      if ( this.deltaTime >= 10000 ) {
+        this.scrambler.scramble();
+        this.controls.scrambleCube();
+        this.newGame = true;
+      }
+
       const duration = this.saved ? 0 :
         this.scrambler.converted.length * ( this.controls.flipSpeeds[0] + 10 );
 
@@ -3888,16 +3899,6 @@ class Game {
         if ( ! this.newGame ) this.timer.start( true );
 
       }, this.transition.durations.zoom );
-
-      if ( this.timer.deltaTime >= 10000 ) {
-
-        this.scrambler.scramble();
-        this.controls.scrambleCube();
-        this.timer.reset();
-        this.timer.start();
-        this.timer.update();
-        this.newGame = true;
-      }
       
     } else {
 
