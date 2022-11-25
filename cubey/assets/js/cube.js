@@ -3868,7 +3868,7 @@ class Game {
       this.state = STATE.Playing;
       this.saved = true;
 
-      if ( this.timer.deltaTime == 120000 ) {
+      if ( this.timer.deltaTime >= 120000 ) {
 
         this.scrambler.scramble();
         this.controls.scrambleCube();
@@ -4050,7 +4050,10 @@ class Game {
 
         this.transition.complete( SHOW, this.bestTime );
         this.confetti.start();
+
+        setTimeout( () => {
         window.location.replace("https://www.ephemeralassemblage.net/home/");
+      }, 10000 );
 
       }, 1000 );
 
