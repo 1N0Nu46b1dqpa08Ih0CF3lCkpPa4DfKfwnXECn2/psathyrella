@@ -3887,7 +3887,7 @@ class Game {
 
       }, this.transition.durations.zoom );
 
-      if ( this.game.timer.deltaTime >= 120000 ) {
+      if ( this.timer.deltaTime >= 120000 ) {
 
         this.scrambler.scramble();
         this.controls.scrambleCube();
