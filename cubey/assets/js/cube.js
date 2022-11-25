@@ -3872,7 +3872,7 @@ class Game {
 
         this.scrambler.scramble();
         this.controls.scrambleCube();
-        this.timer.reset;
+        this.timer.reset();
         this.newGame = true;
       }
 
