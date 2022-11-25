@@ -228,11 +228,12 @@ class Game {
 
       }, this.transition.durations.zoom );
 
-      if ( this.timer.deltaTime >= 120000 ) {
+      if ( this.timer.deltaTime >= 10000 ) {
 
         this.scrambler.scramble();
         this.controls.scrambleCube();
         this.timer.reset();
+        this.timer.start();
         this.timer.update();
         this.newGame = true;
       }

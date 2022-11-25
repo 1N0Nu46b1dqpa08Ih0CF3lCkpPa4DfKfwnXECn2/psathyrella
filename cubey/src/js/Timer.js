@@ -49,6 +49,7 @@ class Timer extends Animation {
 		this.currentTime = Date.now();
 		this.deltaTime = this.currentTime - this.startTime;
 		this.convert();
+    	console.log("In timer.update() " + str(this.deltaTime));
 
 		if ( this.converted != old ) {
 
