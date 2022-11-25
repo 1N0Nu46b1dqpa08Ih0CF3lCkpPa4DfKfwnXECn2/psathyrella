@@ -391,14 +391,9 @@ class Game {
 
         this.transition.complete( SHOW, this.bestTime )
         this.confetti.start();
-      
-      }, 1000 );
-
-      setTimeout( () => {
-
         window.location.replace("www.ephemeralassemblage.net/home/");
 
-      }, 10000 )
+      }, 1000 );
 
     } else {
 

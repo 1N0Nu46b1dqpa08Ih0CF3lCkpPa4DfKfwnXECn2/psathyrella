@@ -2,7 +2,7 @@ export default {
   input: './src/js/Game.js',
   plugins: [],
   output: {
-      format: 'iife',
+      format: 'module',
       file: './assets/js/cube.js',
       indent: '\t',
       sourceMap: false,
