@@ -23,8 +23,8 @@ class Timer extends Animation {
 
 	reset() {
 
-		this.startTime = 0;
-		this.currentTime = 0;
+		this.startTime = Date.now();
+		this.currentTime = Date.now();
 		this.deltaTime = 0;
 		this.converted = '0:00';
 
@@ -56,6 +56,7 @@ class Timer extends Animation {
 			this.setText();
 
 		}
+
 
 	}
 
