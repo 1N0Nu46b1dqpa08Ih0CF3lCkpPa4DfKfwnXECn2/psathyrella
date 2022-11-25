@@ -209,11 +209,12 @@ class Game {
       this.state = STATE.Playing;
       this.saved = true;
 
-      if ( this.timer.deltaTime >= 120000 ) {
+      if ( this.deltaTime >= 120000 ) {
 
         this.scrambler.scramble();
         this.controls.scrambleCube();
         this.timer.reset();
+        this.timer.update();
         this.newGame = true;
       }
 
