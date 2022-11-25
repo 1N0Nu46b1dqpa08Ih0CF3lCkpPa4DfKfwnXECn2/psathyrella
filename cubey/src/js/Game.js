@@ -209,15 +209,6 @@ class Game {
       this.state = STATE.Playing;
       this.saved = true;
 
-      if ( this.game.timer.deltaTime >= 120000 ) {
-
-        this.scrambler.scramble();
-        this.controls.scrambleCube();
-        this.timer.reset();
-        this.timer.update();
-        this.newGame = true;
-      }
-
       this.transition.buttons( BUTTONS.None, BUTTONS.Menu );
 
       this.transition.zoom( STATE.Playing, duration );
@@ -237,6 +228,15 @@ class Game {
 
       }, this.transition.durations.zoom );
 
+      if ( this.game.timer.deltaTime >= 120000 ) {
+
+        this.scrambler.scramble();
+        this.controls.scrambleCube();
+        this.timer.reset();
+        this.timer.update();
+        this.newGame = true;
+      }
+      
     } else {
 
       this.state = STATE.Menu;
