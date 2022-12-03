@@ -2410,12 +2410,11 @@ class Timer extends Animation {
 
 ///////////////////////////
 	    if ( this.deltaTime >= 120000 ) {
-	      this.reset();
 	      game.cube.reset();
 	      game.scrambler.scramble();
 	      game.controls.scrambleCube();
 	      game.newGame = true;
-	      
+	      this.reset();
 	    }
 //////////////////////////
 	}
@@ -2617,7 +2616,7 @@ class Preferences {
 
       size: new Range( 'size', {
         value: this.game.cube.size,
-        range: [ 2, 5 ],
+        range: [ 3, 5 ],
         step: 1,
         onUpdate: value => {
 

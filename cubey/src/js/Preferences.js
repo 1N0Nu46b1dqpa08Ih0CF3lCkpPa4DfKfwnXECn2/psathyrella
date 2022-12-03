@@ -20,7 +20,7 @@ class Preferences {
 
       size: new Range( 'size', {
         value: this.game.cube.size,
-        range: [ 2, 5 ],
+        range: [ 3, 5 ],
         step: 1,
         onUpdate: value => {
 

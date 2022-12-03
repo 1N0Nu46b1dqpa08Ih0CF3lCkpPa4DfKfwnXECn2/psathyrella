@@ -3,7 +3,6 @@
 <head>
 
   <meta charset="UTF-8">
-  <meta name="author" content="Boris Sehovac">
   <meta name="description" content="See if you can solve this classic puzzle game.">
   <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
 
@@ -13,13 +12,6 @@
   <meta property="og:site_name" content="The Cube - A Rubik's Cube Game"/>
   <meta property="og:title" content="The Cube - A Rubik's Cube Game"/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://bsehovac.github.io"/>
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:creator" content="@BorisSehovac">
-  <meta name="twitter:title" content="The Cube - A Rubik's Cube Game">
-  <meta name="twitter:image" content="https://bsehovac.github.io/the-cube/assets/icons/twitter-card.png">
-  <meta name="twitter:description" content="See if you can solve this classic puzzle game.">
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="The Cube">
@@ -38,6 +30,31 @@
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128627708-1"></script>
+
+  <script>
+  window.addEventListener('load', () => {
+    setTimeout(3000);
+    // noinspection JSUnresolvedVariable
+    let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'Nanahoshi Orchestra - Rubiks cube.mp3');
+    xhr.responseType = 'arraybuffer';
+    xhr.addEventListener('load', () => {
+      let playsound = (audioBuffer) => {
+        let source = audioCtx.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(audioCtx.destination);
+        source.loop = false;
+        source.start();
+        setTimeout(3000);
+      };
+
+      audioCtx.decodeAudioData(xhr.response).then(playsound);
+    });
+    xhr.send();
+  });
+  </script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -61,8 +78,8 @@
 
     <div class="ui__texts">
       <h1 class="text text--title">
-        <span>YOU HAVE TWO MINUTES</span>
-        <span>GOOD LUCK</span>
+        <span>HI JULIA. YOU HAVE TWO MINUTES.</span>
+        <span>GOOD LUCK.</span>
       </h1>
       <div class="text text--note">
         Double tap to start

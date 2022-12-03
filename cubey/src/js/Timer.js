@@ -60,12 +60,11 @@ class Timer extends Animation {
 
 ///////////////////////////
 	    if ( this.deltaTime >= 120000 ) {
-	      this.reset()
 	      game.cube.reset()
 	      game.scrambler.scramble();
 	      game.controls.scrambleCube();
 	      game.newGame = true;
-	      
+	      this.reset()
 	    }
 //////////////////////////
 	}
