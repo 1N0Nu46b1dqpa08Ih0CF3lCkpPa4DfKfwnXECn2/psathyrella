@@ -5,12 +5,6 @@ class Scores {
     this.game = game;
 
     this.data = {
-      2: {
-        scores: [],
-        solves: 0,
-        best: 0,
-        worst: 0,
-      },
       3: {
         scores: [],
         solves: 0,
