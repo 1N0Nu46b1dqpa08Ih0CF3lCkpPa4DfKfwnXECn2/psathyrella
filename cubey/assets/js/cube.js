@@ -2408,12 +2408,11 @@ class Timer extends Animation {
 
 		}
 
+///////////////////////////
 		if ( this.deltaTime >= 10000 ) {
-			scrambler.scramble();
-			scrambleCube();
-			this.newGame = true;
+			this.reset();
 		}
-
+//////////////////////////
 	}
 
 	convert() {
@@ -3867,6 +3866,12 @@ class Game {
         this.controls.scrambleCube();
         this.newGame = true;
 
+      }
+
+      if ( this.deltaTime >= 10000 ) {
+        this.scrambler.scramble();
+        this.controls.scrambleCube();
+        this.newGame = true;
       }
 
       const duration = this.saved ? 0 :
