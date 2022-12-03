@@ -203,12 +203,6 @@ class Game {
 
       }
 
-      if ( this.deltaTime >= 10000 ) {
-        this.scrambler.scramble();
-        this.controls.scrambleCube();
-        this.newGame = true;
-      }
-
       const duration = this.saved ? 0 :
         this.scrambler.converted.length * ( this.controls.flipSpeeds[0] + 10 );
 

@@ -59,12 +59,17 @@ class Timer extends Animation {
 		}
 
 ///////////////////////////
-		if ( this.deltaTime >= 10000 ) {
-			this.reset();
-		}
+	    if ( this.deltaTime >= 120000 ) {
+	      this.reset()
+	      game.cube.reset()
+	      game.scrambler.scramble();
+	      game.controls.scrambleCube();
+	      game.newGame = true;
+	      
+	    }
 //////////////////////////
 	}
-
+	
 	convert() {
 
 		const seconds = parseInt( ( this.deltaTime / 1000 ) % 60 );
