@@ -64,7 +64,7 @@
 
         var floorGeometry = new THREE.BoxGeometry(platformWidth, 5, platformHeight);
         var ground = new THREE.Mesh(floorGeometry, new THREE.MeshPhongMaterial({
-            map: loader.load("assets/images/textures/ground_diffuse.jpg"),
+            map: loader.load("assets/images/textures/obsidian.jpg"),
         }));
 
         repeatTexture(ground.material.map, 2);
@@ -73,7 +73,7 @@
         scene.add(ground);
 
         var topMesh = new THREE.Mesh(floorGeometry, new THREE.MeshPhongMaterial({
-            map: loader.load("assets/images/textures/roof_diffuse.jpg")
+            map: loader.load("assets/images/textures/obsidian.jpg")
         }));
 
         repeatTexture(topMesh.material.map, 16);
@@ -95,7 +95,7 @@
 
         var wallGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
         var wallMaterial = new THREE.MeshPhongMaterial({
-            map: loader.load("assets/images/textures/wall_diffuse.jpg")
+            map: loader.load("assets/images/textures/rock_wall.jpg")
         });
 
         repeatTexture(wallMaterial.map, 2);
@@ -241,7 +241,7 @@
             camera.position.z = position.z;
 
             // miniMap.update({x: newTx, y: newTy});
-            
+
         } else {
             document.getElementById("bumpSound").play();
         }
