@@ -259,7 +259,7 @@
 
     function endScreen() {
         if (levelHelper.isFinished || levelHelper.isMobile) {
-            alert("Good job, The game is over\n\nThanks you for playing!");
+            alert("Good job, The game is over\n\nThank you for playing!");
             document.location.href = "https://plus.google.com/u/0/114532615363095107351/posts";
         } else {
             // Remove all childrens.
