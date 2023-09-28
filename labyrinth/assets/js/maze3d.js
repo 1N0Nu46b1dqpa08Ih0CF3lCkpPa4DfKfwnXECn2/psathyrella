@@ -48,6 +48,8 @@
         messageContainer.style.left = (window.innerWidth / 2 - messageContainer.offsetWidth / 2) + "px";
         messageContainer.style.top = (window.innerHeight / 2 - messageContainer.offsetHeight / 2) + "px";
 
+        document.getElementById("music").play();
+
         var timer = setTimeout(function() {
             clearTimeout(timer);
             document.body.removeChild(messageContainer);
