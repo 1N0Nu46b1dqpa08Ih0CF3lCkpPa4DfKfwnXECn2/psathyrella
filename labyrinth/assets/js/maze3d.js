@@ -7,6 +7,19 @@
     var map = new Array();
     var running = true;
 
+    var audioElements = [
+    document.getElementById("music1"),
+    document.getElementById("music2"),
+    document.getElementById("music3"),
+    document.getElementById("music4"),
+    ];
+
+    function pauseAllMusic() {
+        for (var i = 0; i < audioElements.length; i++) {
+            audioElements[i].pause();
+        }
+    }
+
     function initializeEngine() {
         renderer = new THREE.WebGLRenderer({
             antialias: true
@@ -253,29 +266,20 @@
 
     function mainLoop(time) {
         if (running) {
-            
             if (levelHelper.current == 1) {
                 document.getElementById("music1").play();
             }
-            if (levelHelper.current == 2) {
 
-                if (!document.getElementById("music1").paused) {
-                    document.getElementById("music1").pause();
-                }
+            if (levelHelper.current == 2) {
                 document.getElementById("music2").play();
             }
             if (levelHelper.current == 3) {
-                if (!document.getElementById("music2").paused) {
-                    document.getElementById("music2").pause();
-                }
                 document.getElementById("music3").play();
             }
             if (levelHelper.current == 4) {
-                if (!document.getElementById("music3").paused) {
-                    document.getElementById("music3").pause();
-                }
                 document.getElementById("music4").play();
             }
+
             update();
             draw();
             window.requestAnimationFrame(mainLoop, renderer.domElement);
@@ -323,6 +327,7 @@
 
     // Game starting
     function launch() {
+        pauseAllMusic();
         initializeScene();
         mainLoop();
     }
