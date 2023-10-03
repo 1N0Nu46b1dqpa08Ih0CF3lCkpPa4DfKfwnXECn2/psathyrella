@@ -38,7 +38,7 @@
 
         var message = document.createElement("h3");
         // hi
-        message.innerHTML = "You arrive to the grave site of Pavlos, like you always have, every nine days for the past nine years.\nYou have taken care of the tree that provides shade for a resting soul.\nYou have planted poppies around the site, in hopes that they will help.\nYou notice a small package, wrapped in brown paper sitting against the base of the tree.\nIt is a bag of acorns, with a scrap of paper written with one word...\n\nDig.\n\nInto the labyrinthine depths...";
+        message.innerHTML = `You arrive to the grave site of Pavlos, like you always have, every nine days for the past nine years.<br/>You have taken care of the tree that provides shade for a resting soul.<br/>You have planted poppies around the site, in hopes that they will help.<br/>You notice a small package, wrapped in brown paper sitting against the base of the tree.<br/>It is a bag of acorns, with a scrap of paper written with one word...<br/><br/>Dig.<br/><br/>Into the labyrinthine depths...`;
         message.style.textAlign = "center";
         message.style.color = "#ddd";
         message.style.padding = "6px";
@@ -253,7 +253,19 @@
 
     function mainLoop(time) {
         if (running) {
-            document.getElementById("music").play();
+            
+            if (levelHelper.current == 1) {
+                document.getElementById("music1").play();
+            }
+            if (levelHelper.current == 2) {
+                document.getElementById("music2").play();
+            }
+            if (levelHelper.current == 3) {
+                document.getElementById("music3").play();
+            }
+            if (levelHelper.current == 4) {
+                document.getElementById("music4").play();
+            }
             update();
             draw();
             window.requestAnimationFrame(mainLoop, renderer.domElement);
@@ -264,7 +276,7 @@
 
     function endScreen() {
         if (levelHelper.isFinished || levelHelper.isMobile) {
-            alert("##^&Reyna,%^*@&^is*%^$*that^&$@^you?&*\n\n%&^*Will*&%^&$you@&@$^%#click&^$(*%the*^&#%@$button?@%$&^#%*&");
+            alert("##^&Reyna,%^*@&^is*%^$*that^&$@^you?&*\n%&^*Will*&%^&$you@&@$^%#click&^$(*%the*^&#%@$button?@%$%*&");
             document.location.href = "https://ephemeralassemblage.net/home/";
         } else {
             // Remove all childrens.
