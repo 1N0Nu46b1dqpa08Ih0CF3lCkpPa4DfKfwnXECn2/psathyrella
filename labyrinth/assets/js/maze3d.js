@@ -37,6 +37,7 @@
         messageContainer.style.border = "1px solid #333";
 
         var message = document.createElement("h3");
+        // hi
         message.innerHTML = "You arrive to the grave site of Pavlos, like you always have, every nine days for the past nine years.\nYou have taken care of the tree that provides shade for a resting soul.\nYou have planted poppies around the site, in hopes that they will help.\nYou notice a small package, wrapped in brown paper sitting against the base of the tree.\nIt is a bag of acorns, with a scrap of paper written with one word...\n\nDig.\n\nInto the labyrinthine depths...";
         message.style.textAlign = "center";
         message.style.color = "#ddd";
