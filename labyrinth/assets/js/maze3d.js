@@ -125,7 +125,7 @@
                         map: loader.load("assets/images/textures/Dwall.jpg")
                     });
 
-                    repeatTexture(wallMaterial.map, 2);
+                    repeatTexture(DwallMaterial.map, 2);
 
                     camera.position.set(position.x, position.y, position.z);
                     cameraHelper.origin.position.x = position.x;
