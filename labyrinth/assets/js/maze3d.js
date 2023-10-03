@@ -254,19 +254,26 @@
     function mainLoop(time) {
         if (running) {
             
-            if (levelHelper.current == 1) {
+            if (level == 1) {
                 document.getElementById("music1").play();
             }
-            if (levelHelper.current == 2) {
-                document.getElementById("music1").pause();
+            if (level == 2) {
+
+                if (!document.getElementById("music1").paused) {
+                    document.getElementById("music1").pause();
+                }
                 document.getElementById("music2").play();
             }
-            if (levelHelper.current == 3) {
-                document.getElementById("music2").pause()
+            if (level == 3) {
+                if (!document.getElementById("music2").paused) {
+                    document.getElementById("music2").pause();
+                }
                 document.getElementById("music3").play();
             }
-            if (levelHelper.current == 4) {
-                document.getElementById("music3").pause()
+            if (level == 4) {
+                if (!document.getElementById("music3").paused) {
+                    document.getElementById("music3").pause();
+                }
                 document.getElementById("music4").play();
             }
             update();
