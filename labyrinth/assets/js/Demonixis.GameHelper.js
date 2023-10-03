@@ -22,7 +22,7 @@ Demonixis.GameHelper.LevelHelper = function(start, end) {
 };
 
 Demonixis.GameHelper.CameraHelper = function(camera) {
-    this.translation = 5;
+    this.translation = 10;
     this.rotation = 0.05;
     this.origin = {
         position: {
