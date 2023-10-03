@@ -254,23 +254,23 @@
     function mainLoop(time) {
         if (running) {
             
-            if (level == 1) {
+            if (levelHelper.current == 1) {
                 document.getElementById("music1").play();
             }
-            if (level == 2) {
+            if (levelHelper.current == 2) {
 
                 if (!document.getElementById("music1").paused) {
                     document.getElementById("music1").pause();
                 }
                 document.getElementById("music2").play();
             }
-            if (level == 3) {
+            if (levelHelper.current == 3) {
                 if (!document.getElementById("music2").paused) {
                     document.getElementById("music2").pause();
                 }
                 document.getElementById("music3").play();
             }
-            if (level == 4) {
+            if (levelHelper.current == 4) {
                 if (!document.getElementById("music3").paused) {
                     document.getElementById("music3").pause();
                 }
