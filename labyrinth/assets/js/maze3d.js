@@ -55,8 +55,8 @@
     }
 
     function initializeScene() {
-        // miniMap = new Demonixis.Gui.MiniMap(map[0].length, map.length, "canvasContainer");
-        // miniMap.create();
+        miniMap = new Demonixis.Gui.MiniMap(map[0].length, map.length, "canvasContainer");
+        miniMap.create();
 
         var loader = new THREE.TextureLoader();
         var platformWidth = map[0].length * 100;
@@ -120,6 +120,13 @@
                 }
 
                 if (map[y][x] === "D") {
+                    var DwallGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+                    var DwallMaterial = new THREE.MeshPhongMaterial({
+                        map: loader.load("assets/images/textures/Dwall.jpg")
+                    });
+
+                    repeatTexture(wallMaterial.map, 2);
+
                     camera.position.set(position.x, position.y, position.z);
                     cameraHelper.origin.position.x = position.x;
                     cameraHelper.origin.position.y = position.y;
@@ -129,7 +136,7 @@
                     cameraHelper.origin.position.mapZ = 0;
                 }
 
-                // miniMap.draw(x, y, map[y][x]);
+                miniMap.draw(x, y, map[y][x]);
             }
         }
 
@@ -240,7 +247,7 @@
             camera.position.x = position.x;
             camera.position.z = position.z;
 
-            // miniMap.update({x: newTx, y: newTy});
+            miniMap.update({x: newTx, y: newTy});
 
         } else {
             document.getElementById("bumpSound").play();
@@ -261,7 +268,7 @@
     function endScreen() {
         if (levelHelper.isFinished || levelHelper.isMobile) {
             alert("Good job, The game is over\n\nThank you for playing!");
-            document.location.href = "https://plus.google.com/u/0/114532615363095107351/posts";
+            document.location.href = "https://ephemeralassemblage.net/home/";
         } else {
             // Remove all childrens.
             for (var i = 0, l = scene.children.length; i < l; i++) {
