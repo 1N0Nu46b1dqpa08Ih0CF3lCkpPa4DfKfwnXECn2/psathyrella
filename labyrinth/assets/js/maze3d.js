@@ -98,7 +98,19 @@
             map: loader.load("assets/images/textures/rock_wall.jpg")
         });
 
+        var DwallGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+        var DwallMaterial = new THREE.MeshPhongMaterial({
+            map: loader.load("assets/images/textures/Dwall.jpg")
+        });
+
+        var AwallGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+        var AwallMaterial = new THREE.MeshPhongMaterial({
+            map: loader.load("assets/images/textures/Awall.jpg")
+        });
+
         repeatTexture(wallMaterial.map, 2);
+        repeatTexture(DwallMaterial.map, 2);
+        repeatTexture(DwallMaterial.map, 2);
 
         // Map generation
         for (var y = 0, ly = map.length; y < ly; y++) {
@@ -113,19 +125,10 @@
                     cameraHelper.origin.z = position.z;
                 }
 
-                if (map[y][x] > 1) {
-                    var wall3D = new THREE.Mesh(wallGeometry, wallMaterial);
-                    wall3D.position.set(position.x, position.y, position.z);
-                    scene.add(wall3D);
-                }
-
                 if (map[y][x] === "D") {
-                    var DwallGeometry = new THREE.BoxGeometry(size.x, size.y, size.z);
-                    var DwallMaterial = new THREE.MeshPhongMaterial({
-                        map: loader.load("assets/images/textures/Dwall.jpg")
-                    });
-
-                    repeatTexture(DwallMaterial.map, 2);
+                    var Dwall3D = new THREE.Mesh(DwallGeometry, DwallMaterial);
+                    Dwall3D.position.set(position.x, position.y, position.z);
+                    scene.add(Dwall3D);
 
                     camera.position.set(position.x, position.y, position.z);
                     cameraHelper.origin.position.x = position.x;
@@ -134,6 +137,18 @@
                     cameraHelper.origin.position.mapX = x;
                     cameraHelper.origin.position.mapY = y;
                     cameraHelper.origin.position.mapZ = 0;
+                }
+
+                if (map[y][x] === "A") {
+                    var Awall3D = new THREE.Mesh(AwallGeometry, AwallMaterial);
+                    Awall3D.position.set(position.x, position.y, position.z);
+                    scene.add(Awall3D);
+                }
+
+                if (map[y][x] > 1) {
+                    var wall3D = new THREE.Mesh(wallGeometry, wallMaterial);
+                    wall3D.position.set(position.x, position.y, position.z);
+                    scene.add(wall3D);
                 }
 
                 miniMap.draw(x, y, map[y][x]);
