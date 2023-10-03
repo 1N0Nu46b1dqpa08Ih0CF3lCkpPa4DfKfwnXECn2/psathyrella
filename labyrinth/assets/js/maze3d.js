@@ -51,7 +51,7 @@
         var timer = setTimeout(function() {
             clearTimeout(timer);
             document.body.removeChild(messageContainer);
-        }, 60000);
+        }, 20000);
     }
 
     function initializeScene() {
